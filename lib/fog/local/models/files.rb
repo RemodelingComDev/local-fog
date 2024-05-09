@@ -52,6 +52,13 @@ module Fog
           end
         end
 
+        def get_url(key, time = nil)
+          # Use the URI module to escape characters that need encoding in URLs
+          encoded_path = URI.escape(key)
+          # Add the file:// scheme to the front of the path
+          "file://#{Rails.root}/fog/new-remodeling-cms-staging/#{encoded_path}"
+        end
+
         def head(key)
           requires :directory
           path = file_path(key)
