@@ -79,6 +79,12 @@ module Fog
           ::File.join(@local_root, partial)
         end
 
+        def get_bucket(bucket_name, options = {})
+          path = path_to(::File.join(bucket_name, options[:prefix].to_s))
+          files = Dir.glob("#{path}/*")
+          ::JSON.parse({ body: { Contents: files } }.to_json, object_class: OpenStruct)
+        end
+
         def copy_object(source_directory_name, source_object_name, target_directory_name, target_object_name, options={})
           source_path = path_to(::File.join(source_directory_name, source_object_name))
           target_path = path_to(::File.join(target_directory_name, target_object_name))
