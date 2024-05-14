@@ -52,6 +52,11 @@ module Fog
           end
         end
 
+        def get_url(key, time = nil)
+          # Add the file:// scheme to the front of the path
+          "file://#{Rails.root}/fog_local/new-remodeling-cms-staging/#{key}"
+        end
+
         def head(key)
           requires :directory
           path = file_path(key)
